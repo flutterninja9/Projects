@@ -1,4 +1,4 @@
-# uic1
+# Dynamic Themed Instagram Re-Design
 
 A new Flutter application.
 
