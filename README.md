@@ -1,2 +1,2 @@
 # Projects
- Some intresting project you might look upto.
+ Some intresting projects you might look upto.
