@@ -1,8 +1,11 @@
-# music_player
+# Material Calculator
 
-A new Flutter application.
+Dyanmic Themed Calculator using Flutter
 
-## Getting Started
+
+## Try Modifying it.... Show some creativity.
+
+## Try Checking Out The APK
 
 This project is a starting point for a Flutter application.
 
