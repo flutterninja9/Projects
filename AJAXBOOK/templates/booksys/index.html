@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Book Management</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/scrolling-nav.css' %}" rel="stylesheet">
+
+
+
+</head>
+
+<body id="page-top">
+  <script  src="{% static 'js/request.js' %}"></script>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Book Manager</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#services" onclick="listbook();">List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact" onclick="deletebook();">Delete</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Welcome to E-Book Management System</h1>
+      <p class="lead">Mange Your Books Easily</p>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Add Book</h2>
+          <div class="jumbotron jumbotron-black">
+                <div class="form-group">
+    <label for="Name of book">Book Name</label>
+    <input type="text" class="form-control" id="bookname" aria-describedby="emailHelp" placeholder="Enter book name">
+  </div>
+  <div class="form-group">
+    <label for="Name of book">Price</label>
+    <input type="text" class="form-control" id="bookprice" aria-describedby="emailHelp" placeholder="Enter book price">
+  </div><div class="form-group">
+    <label for="Name of book">Pages</label>
+    <input type="text" class="form-control" id="bookpages" aria-describedby="emailHelp" placeholder="Enter pages">
+  </div><div class="form-group">
+    <label for="Name of book">Publisher</label>
+    <input type="text" class="form-control" id="publisher" aria-describedby="emailHelp" placeholder="Enter publisher name">
+  </div>
+  <button type="submit" class="btn btn-success" id="submitbtn">Add Book</button>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>List Of All Books</h2>
+          <div class="jumbotron" id="booklist">List Of All Books</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Delete Books</h2>
+          <div class="jumbotron" id="deletebooks">Delete Books</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Book Manager 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="{% static 'js/scrolling-nav.js' %}"></script>
+
+
+<script type="text/javascript">
+  function listbook() {
+  var url="/list_books";
+  var req = new XMLHttpRequest();
+  var txt="";
+  var x;
+  req.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var myObj = JSON.parse(req.responseText);
+        txt += "<table class='table table-hover'>"
+        txt += "<tr><th>Name</th><th>Price</th><th>Pages</th><th>Publisher</th></tr>"
+      for (x=0;x<myObj.length;x++) {
+        txt += "<tr><td>"+myObj[x]['bookName']+"</td><td>"+myObj[x]['bookPrice']+"</td><td>"+myObj[x]['bookPages']+"</td><td>"+myObj[x]['bookPublisher']+"</td></tr>";
+      }
+      txt += "</table>"
+      document.getElementById("booklist").innerHTML = txt;
+    }
+  };
+  req.open("GET", url, true);
+  req.send();
+}
+
+
+
+function deletebook() {
+  var url="/list_books";
+  var req = new XMLHttpRequest();
+  var txt="";
+  var x;
+  req.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var myObj = JSON.parse(req.responseText);
+        txt += "<table class='table table-hover'>"
+        txt += "<tr><th>Name</th><th>Price</th><th>Pages</th><th>Publisher</th><th>Delete</th></tr>"
+      for (x=0;x<myObj.length;x++) {
+        txt += "<tr><td>"+myObj[x]['bookName']+"</td><td>"+myObj[x]['bookPrice']+"</td><td>"+myObj[x]['bookPages']+"</td><td>"+myObj[x]['bookPublisher']+"</td><td><h6 class='btn btn-danger' onclick='deleteConfirm(id="+myObj[x]['id']+")'>Remove</h6></td></tr>";
+      }
+      txt += "</table>"
+      document.getElementById("deletebooks").innerHTML = txt;
+    }
+  };
+  req.open("GET", url, true);
+  req.send();
+}
+
+
+
+function deleteConfirm(id) {
+  var url="/delete?pk="+id;
+  alert(url);
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var result=req.responseText;
+      console.log(result);
+      if(result==1) {
+        deletebook();
+      }
+      else {
+        alert("Some Error Occured");
+      }
+    }
+  };
+  req.open("GET", url, true);
+  req.send();
+}
+
+
+
+</script>
+
+</body>
+
+</html>
+
