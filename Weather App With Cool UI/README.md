@@ -1,6 +1,7 @@
-# weather_app
+# Weather App 
 
-A new Flutter application.
+Simple Weather App With Amazing UI and made with MVC Architecture.
+State Managed With GetX.
 
 ## Getting Started
 
