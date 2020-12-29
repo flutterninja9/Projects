@@ -3,8 +3,8 @@ import 'package:craftly/data/repository/fetchAccount.dart';
 
 Future<User> getAccountDetails() async {
   try {
-    List<dynamic> rawData = await accountDetails();
-    User account = User.fromJson(rawData[0]);
+    Map<String, dynamic> rawData = await accountDetails();
+    User account = User.fromJson(rawData);
     return account;
   } catch (e) {
     print(e);

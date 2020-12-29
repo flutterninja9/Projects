@@ -21,3 +21,5 @@ class SearchProducts extends ProductEvent {
 class GotoWishList extends ProductEvent {}
 
 class GetAddress extends ProductEvent {}
+
+class GetOrders extends ProductEvent {}

@@ -130,14 +130,27 @@ class Register extends StatelessWidget {
                         child: MaterialButton(
                           color: Colors.amberAccent,
                           onPressed: () async {
-                            await authController.register(
-                                firstName: _firstname.text,
-                                lastName: _lastname.text,
-                                userName: _username.text,
-                                email: _email.text,
-                                password: _password.text,
-                                profilePic: authController.profilePic.value,
-                                phone: _phone.text);
+                            if (_username.text.length < 1 ||
+                                _password.text.length < 1 ||
+                                _firstname.text.length < 1 ||
+                                _lastname.text.length < 1 ||
+                                _email.text.length < 1 ||
+                                _phone.text.length < 1 ||
+                                authController.profilePic.value.isNull) {
+                              Get.rawSnackbar(
+                                  title: 'Oops!',
+                                  message: 'Fields cannot be empty',
+                                  duration: Duration(seconds: 1));
+                            } else {
+                              await authController.register(
+                                  firstName: _firstname.text,
+                                  lastName: _lastname.text,
+                                  userName: _username.text,
+                                  email: _email.text,
+                                  password: _password.text,
+                                  profilePic: authController.profilePic.value,
+                                  phone: _phone.text);
+                            }
                           },
                           child: Obx(() =>
                               authController.logging_in.value == 'true'

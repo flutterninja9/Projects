@@ -1,10 +1,9 @@
 import 'package:craftly/bloc/bloc/product_bloc.dart';
 import 'package:craftly/controllers/authController.dart';
-import 'package:craftly/data/models/addressModel.dart';
 import 'package:craftly/data/models/userModel.dart';
 import 'package:craftly/helpers/urls.dart';
-import 'package:craftly/screens/address.dart';
 import 'package:craftly/screens/address_intro.dart';
+import 'package:craftly/screens/placedOrders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,22 +33,27 @@ class Account extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
+              margin: EdgeInsets.only(left: 5, right: 5),
               child: Column(
                 children: [
+                  Obx(() => controller.logging_in.value == "true"
+                      ? LinearProgressIndicator()
+                      : Container()),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(baseMediaURL + user.profilePic),
+                          backgroundImage: NetworkImage(
+                              baseMediaURL + user.accountDetails[0].profilePic),
                           backgroundColor: Colors.grey[200],
                           radius: 50,
                         )
                       ],
                     ),
                   ),
+                  Divider(),
                   SizedBox(
                     height: Get.height * 0.01,
                   ),
@@ -65,94 +69,20 @@ class Account extends StatelessWidget {
                   SizedBox(
                     height: Get.height * 0.02,
                   ),
-                  Container(
-                    height: Get.height * 0.1,
-                    margin: EdgeInsets.only(left: 10, bottom: 15),
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Card(
-                          elevation: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child: Center(
-                                child: Text(
-                              "Orders",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color.fromRGBO(18, 18, 18, 1)),
-                            )),
-                          ),
-                        ),
-                        Card(
-                          elevation: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child: Center(
-                                child: Text(
-                              "Settings",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color.fromRGBO(18, 18, 18, 1)),
-                            )),
-                          ),
-                        ),
-                        Card(
-                          elevation: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child: Center(
-                                child: Text(
-                              "Payments",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color.fromRGBO(18, 18, 18, 1)),
-                            )),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.to(AddressIntro());
-                          },
-                          child: Card(
-                            elevation: 2,
-                            child: Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Center(
-                                  child: Text(
-                                "Address",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(18, 18, 18, 1)),
-                              )),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
                   Card(
+                    elevation: 3,
                     child: Column(
                       children: [
                         ListTile(
                           title: Text(
-                            "userName",
+                            user.username,
                             style: GoogleFonts.roboto(),
                           ),
                           leading: Icon(Feather.user),
-                          trailing: Text(
-                            "EDIT",
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w500),
-                          ),
                         ),
                         ListTile(
                           title: Text(
-                            "test@gmail.com",
+                            user.email,
                             style: GoogleFonts.roboto(),
                           ),
                           leading: Icon(Feather.mail),
@@ -161,18 +91,74 @@ class Account extends StatelessWidget {
                             style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w500),
                           ),
+                          onTap: () {
+                            Get.defaultDialog(
+                                title: 'Change your email',
+                                content: Stack(
+                                  children: [
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      child: TextFormField(
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        decoration: InputDecoration(
+                                            prefixIcon: Icon(Icons.mail)),
+                                        onFieldSubmitted: (email) async {
+                                          if (email.length == 0) {
+                                            Get.rawSnackbar(
+                                                title: 'Nooo!',
+                                                message:
+                                                    'This field cannot be empty',
+                                                duration: Duration(seconds: 1));
+                                          } else {
+                                            int statusCode = await controller
+                                                .changeEmail(email: email);
+                                            if (statusCode == 0) {
+                                            } else {
+                                              BlocProvider.of<ProductBloc>(
+                                                      context)
+                                                  .add(GetAccount());
+                                            }
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ));
+                          },
                         ),
                         ListTile(
                           title: Text(
-                            user.phoneNo,
+                            user.accountDetails[0].phoneNo,
                             style: GoogleFonts.roboto(),
                           ),
                           leading: Icon(Feather.phone),
-                          trailing: Text(
-                            "EDIT",
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w500),
+                        ),
+                        ListTile(
+                          title: Text(
+                            "My Orders",
+                            style: GoogleFonts.roboto(),
                           ),
+                          leading: Icon(Feather.user),
+                          onTap: () {
+                            BlocProvider.of<ProductBloc>(context)
+                                .add(GetOrders());
+                            Get.to(BlocProvider.value(
+                              value: BlocProvider.of<ProductBloc>(context),
+                              child: MyOrders(),
+                            ));
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            "Addresses",
+                            style: GoogleFonts.roboto(),
+                          ),
+                          leading: Icon(Feather.user),
+                          onTap: () {
+                            Get.to(AddressIntro());
+                          },
                         ),
                         ListTile(
                           tileColor: Colors.white,

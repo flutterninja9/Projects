@@ -160,6 +160,35 @@ class AuthController extends GetxController {
         duration: Duration(seconds: 1));
   }
 
+  // For changing email
+  Future<int> changeEmail({String email}) async {
+    switchOnLoader();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + token.value
+    };
+    Map<String, String> body = {'email': email};
+    http.Response response = await http.post(changeEmailURL,
+        headers: headers, body: json.encode(body));
+    Map<String, dynamic> result = jsonDecode(response.body);
+    if (result['success'] == 'email changed successfully!') {
+      switchOffLoader();
+      Get.back();
+      Get.rawSnackbar(
+          title: 'Success',
+          message: 'Email changed successfully',
+          duration: Duration(seconds: 1));
+      return 1;
+    } else {
+      switchOffLoader();
+      Get.rawSnackbar(
+          title: 'Oops!',
+          message: 'Some error occured',
+          duration: Duration(seconds: 1));
+      return 0;
+    }
+  }
+
   @override
   void onInit() {
     getGenders();

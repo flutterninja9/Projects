@@ -13,10 +13,11 @@ class Loading extends ProductState {}
 
 class Loaded extends ProductState {
   List<Product> products;
-  Loaded({@required this.products});
+  List<Promo> promos;
+  Loaded({@required this.products, @required this.promos});
 
   @override
-  List<Object> get props => [products];
+  List<Object> get props => [products, promos];
 }
 
 class LoadingFailed extends ProductState {}
@@ -48,3 +49,12 @@ class AddressLoaded extends ProductState {
   @override
   List<Object> get props => [addresses];
 }
+
+class OrdersFetched extends ProductState {
+  List<Order> orders;
+  OrdersFetched({@required this.orders});
+  @override
+  List<Object> get props => [orders];
+}
+
+class OrdersNotFetched extends ProductState {}

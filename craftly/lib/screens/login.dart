@@ -2,6 +2,7 @@ import 'package:craftly/controllers/authController.dart';
 import 'package:craftly/screens/root.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatelessWidget {
   TextEditingController _username = TextEditingController();
@@ -25,7 +26,7 @@ class Login extends StatelessWidget {
                     child: TextFormField(
                       controller: _username,
                       decoration: InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'Username',
                           border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black))),
                     ),
@@ -49,9 +50,17 @@ class Login extends StatelessWidget {
                             MaterialButton(
                               color: Colors.amberAccent,
                               onPressed: () async {
-                                await authController.login(
-                                    username: _username.text,
-                                    password: _password.text);
+                                if (_username.text.length < 1 ||
+                                    _password.text.length < 1) {
+                                  Get.rawSnackbar(
+                                      title: 'Oops!',
+                                      message: 'Fields cannot be empty',
+                                      duration: Duration(seconds: 1));
+                                } else {
+                                  await authController.login(
+                                      username: _username.text,
+                                      password: _password.text);
+                                }
                               },
                               child: authController.logging_in == 'true'
                                   ? SizedBox(
@@ -64,6 +73,17 @@ class Login extends StatelessWidget {
                         )),
                   ),
                 ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30, left: 10),
+                child: Text(
+                  "CraftLy.",
+                  style: GoogleFonts.montserrat(
+                      fontSize: 18, fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ],

@@ -4,7 +4,7 @@ import 'package:craftly/controllers/authController.dart';
 import 'package:craftly/helpers/urls.dart';
 import 'package:http/http.dart';
 
-Future<List<dynamic>> accountDetails() async {
+Future<Map<String, dynamic>> accountDetails() async {
   AuthController authController = getC.Get.find();
   Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ Future<List<dynamic>> accountDetails() async {
   try {
     Response response = await get(accountURL, headers: headers);
     Map<String, dynamic> rawAccountInfo = jsonDecode(response.body);
-    return rawAccountInfo["account_details"];
+    return rawAccountInfo;
   } catch (e) {
     print(e);
   }

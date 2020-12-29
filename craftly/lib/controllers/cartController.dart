@@ -5,6 +5,7 @@ import 'package:craftly/controllers/productController.dart';
 import 'package:craftly/data/models/productModel.dart';
 import 'package:craftly/helpers/urls.dart';
 import 'package:craftly/screens/orderSuccess.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,6 +34,13 @@ class CartController extends GetxController {
   //For storing raw cart data
 
   Rx<List> cartItems = Rx<List>();
+
+  // For referencing order status
+  Map orderStatus = {
+    'o': Colors.amber,
+    'ds': Colors.green,
+    'du': Colors.red,
+  };
 
   // Setter for image map
   setImageMap({List<Product> prodList}) async {

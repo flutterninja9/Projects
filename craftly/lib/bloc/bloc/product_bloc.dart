@@ -3,10 +3,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:craftly/controllers/cartController.dart';
 import 'package:craftly/data/models/addressModel.dart';
+import 'package:craftly/data/models/order_model.dart';
 import 'package:craftly/data/models/productModel.dart';
+import 'package:craftly/data/models/promoModel.dart';
 import 'package:craftly/data/models/userModel.dart';
 import 'package:craftly/data/provider/accountProvider.dart';
 import 'package:craftly/data/provider/address_provider.dart';
+import 'package:craftly/data/provider/getOrders.dart';
+import 'package:craftly/data/provider/getPromo.dart';
 import 'package:craftly/data/provider/productProvider.dart';
 import 'package:craftly/data/provider/searchProvider.dart';
 import 'package:craftly/data/provider/wishlist_provider.dart';
@@ -29,7 +33,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       List<Product> products = await getProducts();
       CartController cartController = Get.put(CartController());
       cartController.setImageMap(prodList: products);
-      yield Loaded(products: products);
+      List<Promo> promos = await getPromo();
+      yield Loaded(products: products, promos: promos);
     } else if (event is GetAccount) {
       yield Loading();
       try {
@@ -66,6 +71,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       } catch (e) {
         print(e);
         yield LoadingFailed();
+      }
+    } else if (event is GetOrders) {
+      yield Loading();
+      try {
+        List<Order> orders = await getOrders();
+        yield OrdersFetched(orders: orders);
+      } catch (e) {
+        yield OrdersNotFetched();
       }
     } else {}
   }

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:craftly/bloc/bloc/product_bloc.dart';
 import 'package:craftly/controllers/authController.dart';
-import 'package:craftly/controllers/cartController.dart';
 import 'package:craftly/controllers/externalServiceHandler.dart';
 import 'package:craftly/controllers/productController.dart';
 import 'package:craftly/controllers/uiController.dart';
@@ -25,13 +24,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ProductController productController = getX.Get.put(ProductController());
   AuthController authController = getX.Get.find();
+  PageController pageController = PageController();
   UIController uiController = getX.Get.find();
   ExternalServiceController serviceController =
       getX.Get.put(ExternalServiceController());
   @override
   void initState() {
     BlocProvider.of<ProductBloc>(context).add(GetProducts());
+    pageController = PageController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -77,43 +84,44 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+
                 SliverToBoxAdapter(
                   child: Container(
-                    padding: EdgeInsets.only(
-                        left: getX.Get.width * 0.015,
-                        top: getX.Get.width * 0.03,
-                        bottom: getX.Get.width * 0.03),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                              text: "Hello ",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 22, color: Colors.grey[700]),
-                              children: [
-                                TextSpan(
-                                    text: authController.userName.value,
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).primaryColor)),
-                                TextSpan(
-                                    text: " !",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 22, color: Colors.grey[700])),
-                              ]),
-                        ),
-                        Text("What do you want to buy today?",
-                            style: GoogleFonts.poppins(
-                                fontSize: 20, color: Colors.grey[700])),
-                      ],
-                    ),
-                  ),
+                      height: 250,
+                      width: getX.Get.width,
+                      margin: EdgeInsets.only(bottom: 8, top: 0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: PageView.builder(
+                        controller: pageController,
+                        itemCount: state.promos.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 250,
+                            width: getX.Get.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.pink.withOpacity(0.6),
+                            ),
+                            margin: EdgeInsets.only(right: 6, left: 6, top: 5),
+                            child: CachedNetworkImage(
+                              imageUrl: state.promos[index].image,
+                              fit: BoxFit.cover,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Center(
+                                child: CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                          );
+                        },
+                      )),
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 25, right: 10),
+                      margin: EdgeInsets.only(top: 10, bottom: 10, right: 10),
                       height: 50,
                       width: getX.Get.width,
                       child: ListView.builder(
@@ -166,6 +174,40 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       )),
                 ),
+                // SliverToBoxAdapter(
+                //   child: Container(
+                //     padding: EdgeInsets.only(
+                //         left: getX.Get.width * 0.015,
+                //         top: getX.Get.width * 0.03,
+                //         bottom: getX.Get.width * 0.03),
+                //     child: Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: [
+                //         RichText(
+                //           text: TextSpan(
+                //               text: "Hello ",
+                //               style: GoogleFonts.poppins(
+                //                   fontSize: 22, color: Colors.grey[700]),
+                //               children: [
+                //                 TextSpan(
+                //                     text: authController.userName.value,
+                //                     style: GoogleFonts.poppins(
+                //                         fontSize: 22,
+                //                         fontWeight: FontWeight.bold,
+                //                         color: Theme.of(context).primaryColor)),
+                //                 TextSpan(
+                //                     text: " !",
+                //                     style: GoogleFonts.poppins(
+                //                         fontSize: 22, color: Colors.grey[700])),
+                //               ]),
+                //         ),
+                //         Text("What do you want to buy today?",
+                //             style: GoogleFonts.poppins(
+                //                 fontSize: 20, color: Colors.grey[700])),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

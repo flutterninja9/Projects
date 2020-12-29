@@ -1,6 +1,7 @@
 import 'package:craftly/controllers/authController.dart';
 import 'package:craftly/controllers/cartController.dart';
 import 'package:craftly/controllers/externalServiceHandler.dart';
+import 'package:craftly/screens/address_intro.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -188,7 +189,48 @@ class _FinalDeliveryViewState extends State<FinalDeliveryView> {
                   ),
                 ],
               )
-            : Stack(),
+            : Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          size: 70,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text('No saved address found!',
+                            style: GoogleFonts.ubuntu(fontSize: 18)),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(AddressIntro());
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor)),
+                            child: Text("Add address",
+                                style: GoogleFonts.ubuntu(
+                                    fontSize: 16,
+                                    color: Theme.of(context).primaryColor,
+                                    fontWeight: FontWeight.w500)),
+                          ),
+                        ),
+                      ],
+                    )),
+                  ),
+                ],
+              ),
       ),
     );
   }
