@@ -1,8 +1,7 @@
 Map<String, List> wallpapersRaw = {
   "wallapers": [
     {
-      "imageURL":
-          "https://i.pinimg.com/originals/75/46/c5/7546c5153850a7c1b674e9deaea4a445.jpg",
+      "imageURL": "https://wallpapercave.com/wp/wp4627240.png",
       "category": "Adventure",
     },
     {
@@ -10,7 +9,7 @@ Map<String, List> wallpapersRaw = {
       "category": "Funny",
     },
     {
-      "imageURL": "https://cdn.wallpapersafari.com/3/69/NVz4kr.jpg",
+      "imageURL": "https://wallpapercave.com/wp/wp4999918.png",
       "category": "Royal",
     },
     {
@@ -19,7 +18,7 @@ Map<String, List> wallpapersRaw = {
     },
     {
       "imageURL":
-          "https://bestwallpapers.net/wp-content/uploads/2020/03/Free-Download-4K-Wallpaper-For-Mobile-4K-Wallpapers.jpeg",
+          "https://www.droidviews.com/wp-content/uploads/2019/06/macos-catalina-wall-night-mode-droidviews-phones.jpg",
       "category": "Abstract",
     },
     {

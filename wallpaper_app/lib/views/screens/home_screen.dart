@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/bottomButton.dart';
 
 import '../../controllers/home_screen_controller.dart';
 import '../../models/wallpaper.dart';
@@ -26,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
         statusBarColor: Colors.transparent,
       ),
     );
-    double gauss = exp(-(pow((controller.offsetCards.abs() - 0.5), 2) / 0.08));
     return Scaffold(
       body: Stack(
         children: [
@@ -56,8 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Obx(
+                    // a = -25.0
+                    // b = 0.0
                     () => Transform.translate(
-                      offset: Offset(-20 * gauss * _getOffsetTitle(), 0.0),
+                      offset: Offset(-controller.offset.value * 0.01, 0.0),
                       child: Text(
                         controller.currentCat.value,
                         style: GoogleFonts.poppins(
@@ -88,9 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 600,
+              height: Get.height * 0.75,
               width: Get.width,
-              margin: EdgeInsets.only(bottom: 20),
               child: Obx(
                 () => PageView.builder(
                   controller: controller.scrollController,
@@ -101,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       wallpaper: wallpaper,
                       index: index,
                       controller: controller,
+                      isLongCard: true,
                     );
                   },
                 ),
@@ -109,57 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      onPressed: () => null,
-                      icon: Icon(Icons.screen_lock_portrait_outlined),
-                      color: Colors.purple,
-                      iconSize: 40,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      onPressed: () => null,
-                      icon: Icon(Icons.home_filled),
-                      color: Colors.white,
-                      iconSize: 40,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.7),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      onPressed: () => null,
-                      icon: Icon(Icons.account_circle),
-                      color: Colors.white,
-                      iconSize: 40,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child: BottomButtons(),
           ),
         ],
       ),
