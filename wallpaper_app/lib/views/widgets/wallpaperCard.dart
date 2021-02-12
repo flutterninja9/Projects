@@ -45,6 +45,7 @@ class WallpaperCard extends StatelessWidget {
               angle: -(controller.offsetCards.value - index).abs(),
               child: CachedNetworkImage(
                 imageUrl: wallpaper.imageCompressed,
+                fit: BoxFit.cover,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     Center(
                         child: CircularProgressIndicator(
