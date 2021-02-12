@@ -3,9 +3,11 @@ import 'dart:convert';
 class Wallpaper {
   final String imageURL;
   final String category;
+  final String imageCompressed;
   Wallpaper({
     this.imageURL,
     this.category,
+    this.imageCompressed,
   });
 
   Wallpaper copyWith({
@@ -31,6 +33,7 @@ class Wallpaper {
     return Wallpaper(
       imageURL: map['imageURL'],
       category: map['category'],
+      imageCompressed: map['imageURL'] + "?auto=compress",
     );
   }
 

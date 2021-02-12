@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Cool Wallpaper App',
       theme: AppTheme.primaryTheme,
       darkTheme: AppTheme.primaryDarkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );

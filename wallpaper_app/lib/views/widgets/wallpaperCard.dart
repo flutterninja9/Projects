@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,9 @@ class WallpaperCard extends StatelessWidget {
       margin: EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
         color: Colors.black,
+        border: Border.all(
+          color: Colors.grey[600],
+        ),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -39,9 +43,13 @@ class WallpaperCard extends StatelessWidget {
             scale: (controller.offsetCards.value - index).abs() + 1.2,
             child: Transform.rotate(
               angle: -(controller.offsetCards.value - index).abs(),
-              child: Image.network(
-                wallpaper.imageURL,
-                fit: BoxFit.cover,
+              child: CachedNetworkImage(
+                imageUrl: wallpaper.imageCompressed,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress)),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
           ),

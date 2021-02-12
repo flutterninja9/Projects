@@ -1,6 +1,7 @@
-import 'dart:math';
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -23,105 +24,114 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
         statusBarColor: Colors.transparent,
       ),
     );
     return Scaffold(
-      body: Stack(
-        children: [
-          Obx(() => Container(
-                height: Get.height,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(controller.currentBg.value),
-                    fit: BoxFit.cover,
-                  ),
+      body: Obx(() => controller.isLoading.value
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  strokeWidth: 1.5,
                 ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                  child: Container(
-                    height: Get.height,
-                    width: Get.width,
-                    color: Colors.grey[50].withOpacity(0.2),
-                    child: Container(),
-                  ),
-                ),
-              )),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 45),
-              child: Column(
-                children: [
-                  Obx(
-                    // a = -25.0
-                    // b = 0.0
-                    () => Transform.translate(
-                      offset: Offset(-controller.offset.value * 0.01, 0.0),
-                      child: Text(
-                        controller.currentCat.value,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
+              ),
+            )
+          : Stack(
+              children: [
+                Obx(() => Stack(
+                      children: [
+                        ImageFiltered(
+                          imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Container(
+                              height: Get.height,
+                              width: Get.width,
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  CachedNetworkImage(
+                                    imageUrl: controller.currentBg.value,
+                                    fit: BoxFit.cover,
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        Center(
+                                            child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress)),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                  ),
+                                ],
+                              )),
                         ),
-                      ),
+                      ],
+                    )),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 45),
+                    child: Column(
+                      children: [
+                        Obx(
+                            // a = -25.0
+                            // b = 0.0
+                            () => Text(
+                                  controller.currentCat.value,
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Obx(
+                          () => Text(
+                            "Enjoy awesome ${controller.currentCat.value} wallpapers.",
+                            style: GoogleFonts.manrope(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Obx(
-                    () => Text(
-                      "Enjoy awesome ${controller.currentCat.value} wallpapers.",
-                      style: GoogleFonts.manrope(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: Get.height * 0.75,
-              width: Get.width,
-              child: Obx(
-                () => PageView.builder(
-                  controller: controller.scrollController,
-                  itemCount: controller.wallpapers.value.length,
-                  itemBuilder: (context, index) {
-                    Wallpaper wallpaper = controller.wallpapers.value[index];
-                    return WallpaperCard(
-                      wallpaper: wallpaper,
-                      index: index,
-                      controller: controller,
-                      isLongCard: true,
-                    );
-                  },
                 ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomButtons(),
-          ),
-        ],
-      ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: Get.height * 0.75,
+                    width: Get.width,
+                    child: Obx(
+                      () => PageView.builder(
+                        controller: controller.scrollController,
+                        itemCount: controller.wallpapers.value.length,
+                        itemBuilder: (context, index) {
+                          Wallpaper wallpaper =
+                              controller.wallpapers.value[index];
+                          return WallpaperCard(
+                            wallpaper: wallpaper,
+                            index: index,
+                            controller: controller,
+                            isLongCard: true,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: BottomButtons(
+                    controller: controller,
+                  ),
+                ),
+              ],
+            )),
     );
   }
-}
-
-double _getOffsetTitle() {
-  HomeScreenController controller = Get.find();
-  final offset =
-      controller.offsetCards.value - controller.offsetCards.value.toInt();
-  return offset;
 }
