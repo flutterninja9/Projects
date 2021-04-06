@@ -4,3 +4,4 @@ linter :
   rules:
     file_names : false
     avoid_print : false
+    avoid_redundant_argument_values : false
