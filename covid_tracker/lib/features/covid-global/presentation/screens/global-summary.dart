@@ -11,7 +11,10 @@ class GlobalSummaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Global Stats'),
+        title: Text(
+          'Covid Tracker',
+          style: Theme.of(context).textTheme.headline1,
+        ),
         centerTitle: true,
       ),
       body: BlocBuilder<SummaryBloc, SummaryState>(

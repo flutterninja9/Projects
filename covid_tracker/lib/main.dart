@@ -1,3 +1,4 @@
+import 'package:covid_tracker/core/theme/apptheme.dart';
 import 'package:covid_tracker/di.dart' as di;
 import 'package:covid_tracker/di.dart';
 import 'package:covid_tracker/features/covid-global/presentation/bloc/summary_bloc.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Covid Tracker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.primaryTheme,
+      darkTheme: AppTheme.primaryDark,
+      themeMode: ThemeMode.dark,
       home: BlocProvider<SummaryBloc>(
         create: (context) => sl<SummaryBloc>(),
         child: GlobalSummaryScreen(),

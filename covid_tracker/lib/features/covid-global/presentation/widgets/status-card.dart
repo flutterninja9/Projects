@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 
 class StatusCard extends StatelessWidget {
   final String lable;
   final Color color;
   final String value;
+  final String logo;
   const StatusCard({
     Key key,
     @required this.color,
     @required this.lable,
+    @required this.logo,
     @required this.value,
   }) : super(key: key);
 
@@ -19,23 +22,38 @@ class StatusCard extends StatelessWidget {
         elevation: 2,
         child: Padding(
           padding:
-              const EdgeInsets.only(top: 25, bottom: 25, left: 30, right: 30),
+              const EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                lable,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                  color: color,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    lable,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 22,
+                      color: color,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  WebsafeSvg.asset(
+                    'assets/images/$logo',
+                    height: 60,
+                    width: 60,
+                  ),
+                ],
               ),
               Text(
                 value,
-                style:
-                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                style: Theme.of(context).textTheme.headline2.copyWith(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w300,
+                    ),
               ),
             ],
           ),
