@@ -1,14 +1,14 @@
 import 'package:covid_tracker/features/covid-global/data/source/get-covid-summary-remote-data-source.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   GetCovidSummaryRemoteDataSourceImpl remoteDataSourceImpl;
-  Dio dio;
+  http.Client client;
 
   setUp(() {
-    dio = Dio();
-    remoteDataSourceImpl = GetCovidSummaryRemoteDataSourceImpl(dio: dio);
+    client = http.Client();
+    remoteDataSourceImpl = GetCovidSummaryRemoteDataSourceImpl(client: client);
   });
 
   test('should fetch data from remote-data-source', () async {

@@ -10,6 +10,7 @@ class AppTheme {
     canvasColor: const Color.fromRGBO(18, 18, 18, 1),
     cardColor: const Color.fromRGBO(26, 26, 26, 1),
     primaryColor: const Color.fromRGBO(31, 31, 31, 1),
+    primaryColorDark: Colors.white,
     textTheme: const TextTheme(
       headline1: TextStyle(
         fontWeight: FontWeight.w600,

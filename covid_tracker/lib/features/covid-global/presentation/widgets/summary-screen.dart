@@ -60,16 +60,29 @@ class SummaryLoadedScreen extends StatelessWidget {
             ])),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(left: 5, top: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'More info',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline1
-                          .copyWith(fontSize: 24),
+                      style: Theme.of(context).textTheme.headline1.copyWith(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    ListTile(
+                      title: const Text('Read latest COVID related articles'),
+                      tileColor: Theme.of(context).cardColor,
+                      trailing: Icon(
+                        Icons.navigate_next,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onTap: () {},
                     ),
                   ],
                 ),

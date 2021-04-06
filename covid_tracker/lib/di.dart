@@ -6,8 +6,8 @@ import 'package:covid_tracker/features/covid-global/domain/repository/get-covid-
 import 'package:covid_tracker/features/covid-global/domain/usecase/get-covid-summary.dart';
 import 'package:covid_tracker/features/covid-global/presentation/bloc/summary_bloc.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 
 final sl = GetIt.instance;
 
@@ -31,7 +31,7 @@ Future<void> init() async {
     () => GetCovidSummaryLocalDataSourceImpl(),
   );
   sl.registerLazySingleton<GetCovidSummaryRemoteDataSource>(
-    () => GetCovidSummaryRemoteDataSourceImpl(dio: sl()),
+    () => GetCovidSummaryRemoteDataSourceImpl(client: sl()),
   );
 
   //? Core
@@ -39,6 +39,7 @@ Future<void> init() async {
       () => NetworkInfoImpl(connectivity: sl()));
 
   //? external
-  sl.registerLazySingleton<Dio>(() => Dio());
+
+  sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
 }
