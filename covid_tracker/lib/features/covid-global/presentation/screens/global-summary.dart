@@ -5,6 +5,7 @@ import 'package:covid_tracker/features/covid-global/presentation/widgets/summary
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: use_key_in_widget_constructors
 class GlobalSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
