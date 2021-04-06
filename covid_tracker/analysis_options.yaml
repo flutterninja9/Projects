@@ -5,3 +5,4 @@ linter :
     file_names : false
     avoid_print : false
     avoid_redundant_argument_values : false
+    use_key_in_widget_constructors : false

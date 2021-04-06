@@ -1,6 +1,7 @@
 import 'package:covid_tracker/core/shared/loading-failed.dart';
 import 'package:covid_tracker/core/shared/loading.dart';
-import 'package:covid_tracker/features/covid-global/presentation/bloc/summary_bloc.dart';
+import 'package:covid_tracker/features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
+import 'package:covid_tracker/features/covid-global/presentation/summary-bloc/summary_bloc.dart';
 import 'package:covid_tracker/features/covid-global/presentation/widgets/summary-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +28,11 @@ class GlobalSummaryScreen extends StatelessWidget {
           } else if (state is SummaryLoadingFailed) {
             return LoadingFailed(cause: state.cause.message);
           } else if (state is SummaryLoaded) {
-            return SummaryLoadedScreen(
-              summary: state.summary,
+            return BlocProvider.value(
+              value: BlocProvider.of<NewsBloc>(context),
+              child: SummaryLoadedScreen(
+                summary: state.summary,
+              ),
             );
           }
           return Container();

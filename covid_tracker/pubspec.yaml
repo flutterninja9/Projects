@@ -52,6 +52,9 @@ dependencies:
   # For intlzn.
   intl: ^0.17.0
 
+  # For lauching urls
+  url_launcher: ^6.0.3
+
   # For SVG supportt
   websafe_svg:   
   
