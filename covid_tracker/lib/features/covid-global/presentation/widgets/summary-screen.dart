@@ -21,7 +21,7 @@ class SummaryLoadedScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Last updated ${getDateTime(summary.lastUpdated)}',
+                'Last updated  ${getDateTime(summary.lastUpdated)}',
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 13,
