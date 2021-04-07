@@ -1,4 +1,5 @@
 import 'package:covid_tracker/core/utils/get-date-time.dart';
+import 'package:covid_tracker/features/covid-by-country/presentation/screens/covid-stats-all-country.dart';
 import 'package:covid_tracker/features/covid-global/domain/entity/summary.dart';
 import 'package:covid_tracker/features/covid-global/presentation/screens/news-articles.dart';
 import 'package:covid_tracker/features/covid-global/presentation/summary-bloc/summary_bloc.dart';
@@ -86,6 +87,21 @@ class SummaryLoadedScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => NewsArticles(),
+                        ));
+                      },
+                    ),
+                    const SizedBox(height: 7),
+                    ListTile(
+                      title:
+                          const Text('Get more detailed country information'),
+                      tileColor: Theme.of(context).cardColor,
+                      trailing: Icon(
+                        Icons.navigate_next,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CovidStatusAllCountry(),
                         ));
                       },
                     ),

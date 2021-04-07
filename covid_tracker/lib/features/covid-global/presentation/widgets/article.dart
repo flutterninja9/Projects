@@ -1,6 +1,7 @@
 import 'package:covid_tracker/core/utils/get-date-time.dart';
-import 'package:covid_tracker/core/utils/launchUrl.dart';
 import 'package:covid_tracker/features/covid-global/domain/entity/article.dart';
+import 'package:covid_tracker/features/covid-global/presentation/screens/news-article-details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SingleArticle extends StatelessWidget {
@@ -15,7 +16,9 @@ class SingleArticle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        launchURL(url: article.url);
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => NewsArticleDetail(article: article),
+        ));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
@@ -25,9 +28,12 @@ class SingleArticle extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(article.urlToImage)),
+                Hero(
+                  tag: article.url,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(article.urlToImage)),
+                ),
                 const SizedBox(
                   height: 12,
                 ),

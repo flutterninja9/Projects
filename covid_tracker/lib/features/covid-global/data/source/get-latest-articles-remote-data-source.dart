@@ -35,6 +35,7 @@ class GetLatestArticlesRemoteDataSourceImpl
       });
       return articles;
     } else {
+      print(response.body);
       throw NetworkException();
     }
   }
