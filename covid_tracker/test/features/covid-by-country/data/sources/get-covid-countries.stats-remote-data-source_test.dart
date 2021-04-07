@@ -16,8 +16,6 @@ void main() {
     //arrange
     final result = await remoteDataSourceImpl.getStats();
     //assert
-    print(result[0].country);
-    print(result[0].countryCode);
-    print(result[0].totalDeaths);
+    print(result[0].flag);
   });
 }

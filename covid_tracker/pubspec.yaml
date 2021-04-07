@@ -23,6 +23,10 @@ environment:
   
 
 dependencies:
+
+  # For caching images  
+  cached_network_image: ^3.0.0
+  
   # For connectivity
   cross_connectivity: ^3.0.2
 
@@ -58,10 +62,6 @@ dependencies:
   # For SVG supportt
   websafe_svg:   
   
-
-  
-
-
 
 dev_dependencies:
   flutter_test:

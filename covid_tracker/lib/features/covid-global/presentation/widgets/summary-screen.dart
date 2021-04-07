@@ -1,4 +1,5 @@
 import 'package:covid_tracker/core/utils/get-date-time.dart';
+import 'package:covid_tracker/core/utils/numberFormatter.dart';
 import 'package:covid_tracker/features/covid-by-country/presentation/screens/covid-stats-all-country.dart';
 import 'package:covid_tracker/features/covid-global/domain/entity/summary.dart';
 import 'package:covid_tracker/features/covid-global/presentation/screens/news-articles.dart';
@@ -45,19 +46,19 @@ class SummaryLoadedScreen extends StatelessWidget {
                 logo: 'all.svg',
                 color: Colors.blue,
                 lable: 'Total Confirmed',
-                value: numberFormat.format(summary.confirmed),
+                value: formatNumber(number: summary.confirmed),
               ),
               StatusCard(
                 logo: 'recover.svg',
                 color: Colors.green,
                 lable: 'Total Recovered',
-                value: numberFormat.format(summary.recovered),
+                value: formatNumber(number: summary.recovered),
               ),
               StatusCard(
                 logo: 'dead.svg',
                 color: Colors.redAccent,
                 lable: 'Total Deaths',
-                value: numberFormat.format(summary.deaths),
+                value: formatNumber(number: summary.deaths),
               ),
             ])),
             SliverToBoxAdapter(

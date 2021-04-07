@@ -1,6 +1,7 @@
 import 'package:covid_tracker/core/theme/apptheme.dart';
 import 'package:covid_tracker/di.dart' as di;
 import 'package:covid_tracker/di.dart';
+import 'package:covid_tracker/features/covid-by-country/presentation/bloc/country_bloc.dart';
 import 'package:covid_tracker/features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
 import 'package:covid_tracker/features/covid-global/presentation/screens/global-summary.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<SummaryBloc>(create: (context) => sl()),
         BlocProvider<NewsBloc>(create: (context) => sl()),
+        BlocProvider<CountryBloc>(create: (context) => sl()),
       ],
       child: MaterialApp(
         title: 'Covid Tracker',

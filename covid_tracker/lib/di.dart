@@ -1,4 +1,9 @@
 import 'package:covid_tracker/core/platform/network-info.dart';
+import 'package:covid_tracker/features/covid-by-country/data/repository/get-covid-stats-all-countries-repo-impl.dart';
+import 'package:covid_tracker/features/covid-by-country/data/sources/get-covid-countries.stats-remote-data-source.dart';
+import 'package:covid_tracker/features/covid-by-country/domain/repository/get-covid-stats-all-countries-repo.dart';
+import 'package:covid_tracker/features/covid-by-country/domain/usecase/get-covid-stats-coutries.dart';
+import 'package:covid_tracker/features/covid-by-country/presentation/bloc/country_bloc.dart';
 import 'package:covid_tracker/features/covid-global/data/repository/get-covid-summary-repository-impl.dart';
 import 'package:covid_tracker/features/covid-global/data/repository/get-latest-articles-repo-impl.dart';
 import 'package:covid_tracker/features/covid-global/data/source/get-covid-summary-local-data-source.dart';
@@ -20,10 +25,12 @@ Future<void> init() async {
   //? Factories
   sl.registerFactory(() => SummaryBloc(getCovidSummary: sl()));
   sl.registerFactory(() => NewsBloc(getLatestArticles: sl()));
+  sl.registerFactory(() => CountryBloc(getCovidStatsCountries: sl()));
 
   //? Usecases
   sl.registerLazySingleton(() => GetCovidSummary(repository: sl()));
   sl.registerLazySingleton(() => GetLatestArticles(repository: sl()));
+  sl.registerLazySingleton(() => GetCovidStatsCountries(repository: sl()));
 
   //? Repositories
   sl.registerLazySingleton<GetCovidSummaryRepository>(
@@ -35,6 +42,10 @@ Future<void> init() async {
   sl.registerLazySingleton<GetLatestNewsArticlesRepository>(
       () => GetLatestArticlesRepositoryImpl(source: sl(), networkInfo: sl()));
 
+  sl.registerLazySingleton<GetCovidStatsCountriesRepository>(() =>
+      GetCovidStatsCountriesRepositoryImpl(
+          remoteDataSource: sl(), networkInfo: sl()));
+
   //? Data Sources
   sl.registerLazySingleton<GetCovidSummaryLocalDataSource>(
     () => GetCovidSummaryLocalDataSourceImpl(),
@@ -44,6 +55,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<GetLatestArticlesRemoteDataSource>(
       () => GetLatestArticlesRemoteDataSourceImpl(client: sl()));
+
+  sl.registerLazySingleton<GetCovidStatsConutriesRemoteDataSource>(
+      () => GetCovidStatsConutriesRemoteDataSourceImpl(client: sl()));
 
   //? Core
   sl.registerLazySingleton<NetworkInfo>(

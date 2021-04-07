@@ -17,5 +17,5 @@ final endpoints = {
 // Helps in fetching latest news articles
 String dateTimeParserForUrl() {
   final dTime = DateTime.now();
-  return "${dTime.year}-${dTime.minute}-${dTime.day}";
+  return "${dTime.year}-${dTime.month}-${dTime.day}";
 }
