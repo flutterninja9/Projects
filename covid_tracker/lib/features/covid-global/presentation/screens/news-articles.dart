@@ -1,7 +1,7 @@
-import 'package:covid_tracker/core/shared/loading-failed.dart';
-import 'package:covid_tracker/core/shared/loading.dart';
-import 'package:covid_tracker/features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
-import 'package:covid_tracker/features/covid-global/presentation/widgets/articles-section.dart';
+import '../../../../core/shared/loading-failed.dart';
+import '../../../../core/shared/loading.dart';
+import '../news-bloc/news_bloc_bloc.dart';
+import '../widgets/articles-section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

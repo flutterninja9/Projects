@@ -1,4 +1,4 @@
-import 'package:covid_tracker/core/failures/failure.dart';
+import '../failures/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';

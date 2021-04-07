@@ -1,4 +1,4 @@
-import 'package:covid_tracker/core/utils/numberFormatter.dart';
+import '../../../../core/utils/numberFormatter.dart';
 import 'package:flutter/material.dart';
 
 class TextStat extends StatelessWidget {

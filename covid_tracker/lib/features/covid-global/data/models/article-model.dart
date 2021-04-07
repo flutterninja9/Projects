@@ -1,4 +1,4 @@
-import 'package:covid_tracker/features/covid-global/domain/entity/article.dart';
+import '../../domain/entity/article.dart';
 import 'package:flutter/foundation.dart';
 
 class ArticleModel extends Article {

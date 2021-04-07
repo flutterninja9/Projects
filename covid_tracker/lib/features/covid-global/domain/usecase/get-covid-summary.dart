@@ -1,7 +1,7 @@
-import 'package:covid_tracker/core/failures/failure.dart';
-import 'package:covid_tracker/core/usecase/base-usecase.dart';
-import 'package:covid_tracker/features/covid-global/domain/entity/summary.dart';
-import 'package:covid_tracker/features/covid-global/domain/repository/get-covid-summary-repository.dart';
+import '../../../../core/failures/failure.dart';
+import '../../../../core/usecase/base-usecase.dart';
+import '../entity/summary.dart';
+import '../repository/get-covid-summary-repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 

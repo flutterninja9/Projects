@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:covid_tracker/core/failures/failure.dart';
-import 'package:covid_tracker/core/shared/loading.dart';
-import 'package:covid_tracker/core/usecase/base-usecase.dart';
-import 'package:covid_tracker/features/covid-global/domain/entity/article.dart';
+import '../../../../core/failures/failure.dart';
+import '../../../../core/shared/loading.dart';
+import '../../../../core/usecase/base-usecase.dart';
+import '../../domain/entity/article.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:covid_tracker/features/covid-global/domain/usecase/get-latest-articles.dart';
+import '../../domain/usecase/get-latest-articles.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'news_bloc_event.dart';

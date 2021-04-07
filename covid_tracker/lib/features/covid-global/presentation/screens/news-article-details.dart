@@ -1,8 +1,8 @@
-import 'package:covid_tracker/core/utils/get-date-time.dart';
-import 'package:covid_tracker/core/utils/launchUrl.dart';
+import '../../../../core/utils/get-date-time.dart';
+import '../../../../core/utils/launchUrl.dart';
 import 'package:flutter/material.dart';
 
-import 'package:covid_tracker/features/covid-global/domain/entity/article.dart';
+import '../../domain/entity/article.dart';
 
 class NewsArticleDetail extends StatelessWidget {
   final Article article;

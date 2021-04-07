@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:covid_tracker/features/covid-by-country/domain/entity/country.dart';
+import '../../domain/entity/country.dart';
 
 class CountryModel extends Country {
   const CountryModel({

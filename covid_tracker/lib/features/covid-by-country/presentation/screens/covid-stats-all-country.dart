@@ -1,7 +1,7 @@
-import 'package:covid_tracker/core/shared/loading-failed.dart';
-import 'package:covid_tracker/core/shared/loading.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/bloc/country_bloc.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/widgets/countries-data.dart';
+import '../../../../core/shared/loading-failed.dart';
+import '../../../../core/shared/loading.dart';
+import '../bloc/country_bloc.dart';
+import '../widgets/countries-data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

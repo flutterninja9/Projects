@@ -1,5 +1,5 @@
-import 'package:covid_tracker/core/shared/secrets.dart';
-import 'package:covid_tracker/core/utils/api-url-maker.dart';
+import '../../shared/secrets.dart';
+import '../../utils/api-url-maker.dart';
 
 enum Endpoint {
   // ignore: constant_identifier_names

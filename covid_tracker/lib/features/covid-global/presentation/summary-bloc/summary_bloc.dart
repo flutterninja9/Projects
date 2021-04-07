@@ -4,9 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:covid_tracker/core/failures/failure.dart';
-import 'package:covid_tracker/features/covid-global/domain/entity/summary.dart';
-import 'package:covid_tracker/features/covid-global/domain/usecase/get-covid-summary.dart';
+import '../../../../core/failures/failure.dart';
+import '../../domain/entity/summary.dart';
+import '../../domain/usecase/get-covid-summary.dart';
 
 part 'summary_event.dart';
 part 'summary_state.dart';

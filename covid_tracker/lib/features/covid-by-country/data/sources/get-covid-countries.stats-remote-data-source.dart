@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:covid_tracker/core/failures/exceptions.dart';
-import 'package:covid_tracker/core/routes/api-routes/api-endpoints.dart';
-import 'package:covid_tracker/core/utils/get-endpoints.dart';
-import 'package:covid_tracker/features/covid-by-country/data/models/country-model.dart';
+import '../../../../core/failures/exceptions.dart';
+import '../../../../core/routes/api-routes/api-endpoints.dart';
+import '../../../../core/utils/get-endpoints.dart';
+import '../models/country-model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 

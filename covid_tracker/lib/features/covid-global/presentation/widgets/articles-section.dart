@@ -1,6 +1,6 @@
-import 'package:covid_tracker/features/covid-global/domain/entity/article.dart';
-import 'package:covid_tracker/features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
-import 'package:covid_tracker/features/covid-global/presentation/widgets/article.dart';
+import '../../domain/entity/article.dart';
+import '../news-bloc/news_bloc_bloc.dart';
+import 'article.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

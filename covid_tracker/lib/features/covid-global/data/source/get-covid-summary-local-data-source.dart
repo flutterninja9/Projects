@@ -1,4 +1,4 @@
-import 'package:covid_tracker/features/covid-global/data/models/summary-model.dart';
+import '../models/summary-model.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class GetCovidSummaryLocalDataSource {

@@ -1,10 +1,10 @@
-import 'package:covid_tracker/core/failures/exceptions.dart';
-import 'package:covid_tracker/core/failures/messages.dart';
-import 'package:covid_tracker/core/platform/network-info.dart';
-import 'package:covid_tracker/features/covid-by-country/data/sources/get-covid-countries.stats-remote-data-source.dart';
-import 'package:covid_tracker/features/covid-by-country/domain/entity/country.dart';
-import 'package:covid_tracker/core/failures/failure.dart';
-import 'package:covid_tracker/features/covid-by-country/domain/repository/get-covid-stats-all-countries-repo.dart';
+import '../../../../core/failures/exceptions.dart';
+import '../../../../core/failures/messages.dart';
+import '../../../../core/platform/network-info.dart';
+import '../sources/get-covid-countries.stats-remote-data-source.dart';
+import '../../domain/entity/country.dart';
+import '../../../../core/failures/failure.dart';
+import '../../domain/repository/get-covid-stats-all-countries-repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 

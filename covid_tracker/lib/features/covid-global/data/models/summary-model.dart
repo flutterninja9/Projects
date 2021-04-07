@@ -1,4 +1,4 @@
-import 'package:covid_tracker/features/covid-global/domain/entity/summary.dart';
+import '../../domain/entity/summary.dart';
 import 'package:flutter/cupertino.dart';
 
 class SummaryModel extends Summary {

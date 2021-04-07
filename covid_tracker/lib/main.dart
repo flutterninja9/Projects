@@ -1,11 +1,12 @@
-import 'package:covid_tracker/core/theme/apptheme.dart';
-import 'package:covid_tracker/di.dart' as di;
-import 'package:covid_tracker/di.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/bloc/country_bloc.dart';
-import 'package:covid_tracker/features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
-import 'package:covid_tracker/features/covid-global/presentation/screens/global-summary.dart';
+import 'core/theme/apptheme.dart';
+import 'di.dart' as di;
+import 'di.dart';
+import 'features/covid-by-country/presentation/bloc/country_bloc.dart';
+import 'features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
+import 'features/covid-global/presentation/screens/global-summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import 'features/covid-global/presentation/summary-bloc/summary_bloc.dart';
 
@@ -25,11 +26,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<NewsBloc>(create: (context) => sl()),
         BlocProvider<CountryBloc>(create: (context) => sl()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         title: 'Covid Tracker',
         theme: AppTheme.primaryTheme,
         darkTheme: AppTheme.primaryDark,
-        themeMode: ThemeMode.dark,
         home: GlobalSummaryScreen(),
       ),
     );

@@ -1,21 +1,23 @@
-import 'package:covid_tracker/core/platform/network-info.dart';
-import 'package:covid_tracker/features/covid-by-country/data/repository/get-covid-stats-all-countries-repo-impl.dart';
-import 'package:covid_tracker/features/covid-by-country/data/sources/get-covid-countries.stats-remote-data-source.dart';
-import 'package:covid_tracker/features/covid-by-country/domain/repository/get-covid-stats-all-countries-repo.dart';
-import 'package:covid_tracker/features/covid-by-country/domain/usecase/get-covid-stats-coutries.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/bloc/country_bloc.dart';
-import 'package:covid_tracker/features/covid-global/data/repository/get-covid-summary-repository-impl.dart';
-import 'package:covid_tracker/features/covid-global/data/repository/get-latest-articles-repo-impl.dart';
-import 'package:covid_tracker/features/covid-global/data/source/get-covid-summary-local-data-source.dart';
-import 'package:covid_tracker/features/covid-global/data/source/get-covid-summary-remote-data-source.dart';
-import 'package:covid_tracker/features/covid-global/data/source/get-latest-articles-remote-data-source.dart';
-import 'package:covid_tracker/features/covid-global/domain/repository/get-covid-summary-repository.dart';
-import 'package:covid_tracker/features/covid-global/domain/repository/get-latest-articles-repository.dart';
-import 'package:covid_tracker/features/covid-global/domain/usecase/get-covid-summary.dart';
-import 'package:covid_tracker/features/covid-global/domain/usecase/get-latest-articles.dart';
-import 'package:covid_tracker/features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
-import 'package:covid_tracker/features/covid-global/presentation/summary-bloc/summary_bloc.dart';
+import 'core/controllers/theme-controller.dart';
+import 'core/platform/network-info.dart';
+import 'features/covid-by-country/data/repository/get-covid-stats-all-countries-repo-impl.dart';
+import 'features/covid-by-country/data/sources/get-covid-countries.stats-remote-data-source.dart';
+import 'features/covid-by-country/domain/repository/get-covid-stats-all-countries-repo.dart';
+import 'features/covid-by-country/domain/usecase/get-covid-stats-coutries.dart';
+import 'features/covid-by-country/presentation/bloc/country_bloc.dart';
+import 'features/covid-global/data/repository/get-covid-summary-repository-impl.dart';
+import 'features/covid-global/data/repository/get-latest-articles-repo-impl.dart';
+import 'features/covid-global/data/source/get-covid-summary-local-data-source.dart';
+import 'features/covid-global/data/source/get-covid-summary-remote-data-source.dart';
+import 'features/covid-global/data/source/get-latest-articles-remote-data-source.dart';
+import 'features/covid-global/domain/repository/get-covid-summary-repository.dart';
+import 'features/covid-global/domain/repository/get-latest-articles-repository.dart';
+import 'features/covid-global/domain/usecase/get-covid-summary.dart';
+import 'features/covid-global/domain/usecase/get-latest-articles.dart';
+import 'features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
+import 'features/covid-global/presentation/summary-bloc/summary_bloc.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
+import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,6 +35,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetCovidStatsCountries(repository: sl()));
 
   //? Repositories
+  Get.put(ThemeController());
   sl.registerLazySingleton<GetCovidSummaryRepository>(
       () => GetCovidSummaryRepositoryImpl(
             networkInfo: sl(),

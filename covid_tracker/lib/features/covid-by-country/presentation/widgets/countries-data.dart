@@ -1,6 +1,6 @@
-import 'package:covid_tracker/features/covid-by-country/domain/entity/country.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/widgets/country-flag-section.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/widgets/textStat.dart';
+import '../../domain/entity/country.dart';
+import 'country-flag-section.dart';
+import 'textStat.dart';
 import 'package:flutter/material.dart';
 
 class CountriesData extends StatelessWidget {

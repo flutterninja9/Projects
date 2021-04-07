@@ -1,6 +1,6 @@
-import 'package:covid_tracker/core/utils/get-date-time.dart';
-import 'package:covid_tracker/features/covid-global/domain/entity/article.dart';
-import 'package:covid_tracker/features/covid-global/presentation/screens/news-article-details.dart';
+import '../../../../core/utils/get-date-time.dart';
+import '../../domain/entity/article.dart';
+import '../screens/news-article-details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

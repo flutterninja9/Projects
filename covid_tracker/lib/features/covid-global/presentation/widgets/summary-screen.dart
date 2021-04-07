@@ -1,10 +1,10 @@
-import 'package:covid_tracker/core/utils/get-date-time.dart';
-import 'package:covid_tracker/core/utils/numberFormatter.dart';
-import 'package:covid_tracker/features/covid-by-country/presentation/screens/covid-stats-all-country.dart';
-import 'package:covid_tracker/features/covid-global/domain/entity/summary.dart';
-import 'package:covid_tracker/features/covid-global/presentation/screens/news-articles.dart';
-import 'package:covid_tracker/features/covid-global/presentation/summary-bloc/summary_bloc.dart';
-import 'package:covid_tracker/features/covid-global/presentation/widgets/status-card.dart';
+import '../../../../core/utils/get-date-time.dart';
+import '../../../../core/utils/numberFormatter.dart';
+import '../../../covid-by-country/presentation/screens/covid-stats-all-country.dart';
+import '../../domain/entity/summary.dart';
+import '../screens/news-articles.dart';
+import '../summary-bloc/summary_bloc.dart';
+import 'status-card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
