@@ -1,7 +1,9 @@
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+
 import '../../domain/entity/country.dart';
 import 'country-flag-section.dart';
 import 'textStat.dart';
-import 'package:flutter/material.dart';
 
 class CountriesData extends StatelessWidget {
   final List<Country> countries;
