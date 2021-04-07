@@ -14,11 +14,6 @@ import '../widgets/summary-screen.dart';
 class GlobalSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Theme.of(context).primaryColor,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         title: Text(

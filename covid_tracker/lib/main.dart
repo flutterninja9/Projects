@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+
 import 'core/theme/apptheme.dart';
 import 'di.dart' as di;
 import 'di.dart';
 import 'features/covid-by-country/presentation/bloc/country_bloc.dart';
 import 'features/covid-global/presentation/news-bloc/news_bloc_bloc.dart';
 import 'features/covid-global/presentation/screens/global-summary.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-
 import 'features/covid-global/presentation/summary-bloc/summary_bloc.dart';
 
 // ignore: avoid_void_async
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         title: 'Covid Tracker',
         theme: AppTheme.primaryTheme,
         darkTheme: AppTheme.primaryDark,
+        debugShowCheckedModeBanner: false,
         home: GlobalSummaryScreen(),
       ),
     );
